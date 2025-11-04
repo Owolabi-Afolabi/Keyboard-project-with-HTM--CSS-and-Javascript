@@ -4,95 +4,94 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Virtual Keyboard</title>
-  <title>Virtual Keyboard</title>
-    </head>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
     <body>
-       <h2 class="title">Virtual Keyboard</h2>
+       <h2 class="title">Virtual keyboard</h2>
        <div class="textInput">
        <textarea id="textInput" placeholder="Type here..."></textarea>
        </div>
 
-<div id="keyboard">
-  <div class="key-row">
-    <div class="key">`</div>
-     <div class="key">1</div>
-      <div class="key">2</div>
-      <div class="key">3</div>
-      <div class="key">4</div>
-      <div class="key">5</div>
-      <div class="key">6</div>
-      <div class="key">7</div>
-      <div class="key">8</div>
-      <div class="key">9</div>
-      <div class="key">0</div>
-      <div class="key">-</div>
-      <div class="key">=</div>
-      <div class="key" data-key="Backspace">Backspace</div>
+<div class="keyboard">
+  <div class="keyboard_row">
+    <div class="keyboard_key">`</div>
+     <div class="keyboard_key">1</div>
+      <div class="keyboard_key">2</div>
+      <div class="keyboard_key">3</div>
+      <div class="keyboard_key">4</div>
+      <div class="keyboard_key">5</div>
+      <div class="keyboard_key">6</div>
+      <div class="keyboard_key">7</div>
+      <div class="keyboard_key">8</div>
+      <div class="keyboard_key">9</div>
+      <div class="keyboard_key">0</div>
+      <div class="keyboard_key">-</div>
+      <div class="keyboard_key">=</div>
+      <div class="keyboard_key" data-keyboard="Backspace">Backspace</div>
   </div>       
 
-  <div class="key-row">
-     <div class="key" data-key="Tab">Tab</div>
-     <div class="key">Q</div>
-      <div class="key">W</div>
-      <div class="key">E</div>
-      <div class="key">R</div>
-      <div class="key">T</div>
-      <div class="key">Y</div>
-      <div class="key">U</div>
-      <div class="key">I</div>
-      <div class="key">O</div>
-      <div class="key">P</div>
-      <div class="key">[</div>
-      <div class="key">]</div>
-      <div class="key">\</div>
+  <div class="keyboard_row">
+     <div class="keyboard_key" data-keyboard="Tab">Tab</div>
+     <div class="keyboard_key">Q</div>
+      <div class="keyboard_key">W</div>
+      <div class="keyboard_key">E</div>
+      <div class="keyboard_key">R</div>
+      <div class="keyboard_key">T</div>
+      <div class="keyboard_key">Y</div>
+      <div class="keyboard_key">U</div>
+      <div class="keyboard_key">I</div>
+      <div class="keyboard_key">O</div>
+      <div class="keyboard_key">P</div>
+      <div class="keyboard_key">[</div>
+      <div class="keyboard_key">]</div>
+      <div class="keyboard_key">\</div>
   </div>
 
   <!-- Row 2 -->
-  <div class="key-row">
-     <div class="key" data-key="CapsLock">CapsLock</div>
-    <div class="key">A</div>
-    <div class="key">S</div>
-    <div class="key">D</div>
-    <div class="key">F</div>
-    <div class="key">G</div>
-    <div class="key">H</div>
-    <div class="key">J</div>
-    <div class="key">K</div>
-    <div class="key">L</div>
-    <div class="key">;</div>
-    <div class="key">'</div>
-     <div class="key" data-key="Enter">Enter</div>
+  <div class="keyboard_row">
+     <div class="keyboard_key" data-keyboard="CapsLock">CapsLock</div>
+    <div class="keyboard_key">A</div>
+    <div class="keyboard_key">S</div>
+    <div class="keyboard_key">D</div>
+    <div class="keyboard_key">F</div>
+    <div class="keyboard_key">G</div>
+    <div class="keyboard_key">H</div>
+    <div class="keyboard_key">J</div>
+    <div class="keyboard_key">K</div>
+    <div class="keyboard_key">L</div>
+    <div class="keyboard_key">;</div>
+    <div class="keyboard_key">'</div>
+     <div class="keyboard_key" data-keyboard="Enter">Enter</div>
   </div>
 
-  <div class="key-row">
-    <div class="key" data-key="Shift">Shift</div>
-    <div class="key">Z</div>
-    <div class="key">X</div>
-    <div class="key">C</div>
-    <div class="key">V</div>
-    <div class="key">B</div>
-    <div class="key">N</div>
-    <div class="key">M</div>
-    <div class="key">,</div>
-    <div class="key">.</div>
-    <div class="key">/</div>
-    <div class="key" data-key="Shift">Shift</div>
+  <div class="keyboard_row">
+    <div class="keyboard_key" data-keyboard="Shift">Shift</div>
+    <div class="keyboard_key">Z</div>
+    <div class="keyboard_key">X</div>
+    <div class="keyboard_key">C</div>
+    <div class="keyboard_key">V</div>
+    <div class="keyboard_key">B</div>
+    <div class="keyboard_key">N</div>
+    <div class="keyboard_key">M</div>
+    <div class="keyboard_key">,</div>
+    <div class="keyboard_key">.</div>
+    <div class="keyboard_key">/</div>
+    <div class="keyboard_key" data-keyboard="Shift">Shift</div>
   </div>
 
   
-  <div class="key-row">
-    <div class="key" data-key="Ctrl">Ctrl</div>
-    <div class="key" data-key="Alt">Alt</div>
-    <div class="key" data-key="Spacebar">Spacebar</div>
-    <div class="key" data-key="Alt">Alt</div>
-     <div class="key" data-key="Fn">Fn</div>
-      <div class="key" data-key="Ctrl">Ctrl</div>
+  <div class="keyboard_row">
+    <div class="keyboard_key" data-keyboard="Ctrl">Ctrl</div>
+    <div class="keyboard_key" data-keyboard="Alt">Alt</div>
+    <div class="keyboard_key" data-keyboard="Spacebar">Spacebar</div>
+    <div class="keyboard_key" data-keyboard="Alt">Alt</div>
+     <div class="keyboard_key" data-keyboard="Fn">Fn</div>
+      <div class="keyboard_key" data-keyboard="Ctrl">Ctrl</div>
   </div>
 </div>
 
 </div>
- <link rel="stylesheet" href="styles.css">
   <script src="script.js"></script>
 </body> 
 </html>

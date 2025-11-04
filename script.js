@@ -1,141 +1,158 @@
-// ---------- script.js ----------
-
-// 1) Find the text box and all keys
-const textBox = document.getElementById('textInput');
-const keys = Array.from(document.querySelectorAll('.key'));
-
-// 2) State for CapsLock, Shift, and key-holding
-let capsOn = false;
-let shiftOn = false;
-let holdTimer = null;
-
-// 3) Map of characters that change when Shift is held (so we can produce symbols)
-const shiftMap = {
-  '`': '~', '1': '!', '2': '@', '3': '#', '4': '$', '5': '%', '6': '^',
-  '7': '&', '8': '*', '9': '(', '0': ')', '-': '_', '=': '+',
-  '[': '{', ']': '}', '\\': '|', ';': ':', "'": '"', ',': '<', '.': '>', '/': '?'
-};
-
-// 4) Utility - test if a string is a single English letter
-function isLetter(ch) {
-  return /^[a-zA-Z]$/.test(ch);
-}
-
-// 5) Highlight/un-highlight shift keys (visual feedback)
-function setShiftVisual(on) {
-  document.querySelectorAll('[data-key="Shift"]').forEach(k => {
-    k.classList.toggle('active', on);
-  });
-}
-
-// 6) Highlight/un-highlight capslock key if present
-function setCapsVisual(on) {
-  const caps = document.querySelector('[data-key="CapsLock"]');
-  if (caps) caps.classList.toggle('active', on);
-}
-
-// 7) Main function to type a character
-function typeCharacter(raw) {
-  if (raw === 'Backspace') {
-    textBox.value = textBox.value.slice(0, -1);
-    return;
-  }
-
-  if (raw === 'Enter') {
-    textBox.value += '\n';
-    return;
-  }
-
-  if (raw === 'Tab') {
-    textBox.value += '\t';
-    return;
-  }
-
-  if (raw === 'Spacebar') {
-    textBox.value += ' ';
-    return;
-  }
-
-  if (raw === 'CapsLock') {
-    capsOn = !capsOn;
-    setCapsVisual(capsOn);
-    return;
-  }
-
-  if (raw === 'Shift') {
-    shiftOn = true;
-    setShiftVisual(true);
-    return;
-  }
-
-  // Default: normal key
-  let out = raw;
-
-  if (isLetter(raw)) {
-    // Uppercase only if one of caps or shift is active (not both)
-    const makeUpper = (capsOn && !shiftOn) || (!capsOn && shiftOn);
-    out = makeUpper ? raw.toUpperCase() : raw.toLowerCase();
-  } else {
-    // Non-letter: use symbol if shift is active
-    if (shiftOn && shiftMap[raw]) {
-      out = shiftMap[raw];
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const textInput = document.getElementById('textInput');
+    const keyboardKeys = document.querySelectorAll('.keyboard_key');
+    
+    // Focus on textarea when clicking anywhere on the page
+    document.addEventListener('click', function() {
+        textInput.focus();
+    });
+    
+    // Handle keyboard key clicks
+    keyboardKeys.forEach(key => {
+        key.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            handleKeyPress(this);
+            this.classList.add('keyboard_key--active');
+        });
+        
+        key.addEventListener('mouseup', function() {
+            this.classList.remove('keyboard_key--active');
+            this.classList.add('keyboard_key--pressed');
+            setTimeout(() => {
+                this.classList.remove('keyboard_key--pressed');
+            }, 150);
+        });
+        
+        key.addEventListener('mouseleave', function() {
+            this.classList.remove('keyboard_key--active');
+        });
+        
+        // Touch support for mobile devices
+        key.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            handleKeyPress(this);
+            this.classList.add('keyboard_key--active');
+        });
+        
+        key.addEventListener('touchend', function() {
+            this.classList.remove('keyboard_key--active');
+            this.classList.add('keyboard_key--pressed');
+            setTimeout(() => {
+                this.classList.remove('keyboard_key--pressed');
+            }, 150);
+        });
+    });
+    
+    function handleKeyPress(keyElement) {
+        const keyText = keyElement.textContent;
+        const keyboardAction = keyElement.getAttribute('data-keyboard');
+        const startPos = textInput.selectionStart;
+        const endPos = textInput.selectionEnd;
+        const currentValue = textInput.value;
+        
+        // Handle special keys
+        if (keyboardAction) {
+            switch (keyboardAction) {
+                case 'Backspace':
+                    if (startPos === endPos && startPos > 0) {
+                        // Delete character before cursor
+                        textInput.value = currentValue.substring(0, startPos - 1) + currentValue.substring(endPos);
+                        textInput.selectionStart = textInput.selectionEnd = startPos - 1;
+                    } else if (startPos !== endPos) {
+                        // Delete selected text
+                        textInput.value = currentValue.substring(0, startPos) + currentValue.substring(endPos);
+                        textInput.selectionStart = textInput.selectionEnd = startPos;
+                    }
+                    break;
+                    
+                case 'Tab':
+                    insertTextAtCursor('\t');
+                    break;
+                    
+                case 'Enter':
+                    insertTextAtCursor('\n');
+                    break;
+                    
+                case 'Spacebar':
+                    insertTextAtCursor(' ');
+                    break;
+                    
+                case 'Shift':
+                case 'CapsLock':
+                case 'Ctrl':
+                case 'Alt':
+                case 'Fn':
+                    // These are modifier keys - you can add functionality later
+                    console.log(`${keyboardAction} key pressed`);
+                    break;
+            }
+        } else {
+            // Regular character keys
+            insertTextAtCursor(keyText);
+        }
+        
+        // Trigger input event for any real-time processing
+        textInput.dispatchEvent(new Event('input', { bubbles: true }));
     }
-  }
-
-  textBox.value += out;
-
-  // Shift only works for one press
-  if (shiftOn) {
-    shiftOn = false;
-    setShiftVisual(false);
-  }
-}
-
-// 8) Handle when a key is pressed (clicked)
-function handleKeyClick(keyEl) {
-  const raw = (keyEl.dataset.key || keyEl.textContent).trim();
-
-  // Type the character
-  typeCharacter(raw);
-
-  // If user is holding the mouse, keep typing
-  holdTimer = setInterval(() => {
-    typeCharacter(raw);
-  }, 100);
-}
-
-// 9) Stop typing when mouse is released or leaves the key
-function stopTyping() {
-  clearInterval(holdTimer);
-  holdTimer = null;
-  // Reset shift visual (if shift was pressed)
-  if (shiftOn) {
-    shiftOn = false;
-    setShiftVisual(false);
-  }
-}
-
-// 10) Attach event listeners to each key
-keys.forEach(key => {
-  key.addEventListener('mousedown', () => handleKeyClick(key));
-  key.addEventListener('mouseup', stopTyping);
-  key.addEventListener('mouseleave', stopTyping);
-});
-
-// 11) Optional: glow effect when using real keyboard keys
-document.addEventListener('keydown', (e) => {
-  const key = e.key;
-  const match = keys.find(k => {
-    const dk = k.dataset.key;
-    if (dk && dk.toLowerCase() === key.toLowerCase()) return true;
-    return k.textContent.trim().toLowerCase() === key.toLowerCase();
-  });
-
-  if (match) {
-    match.classList.add('pressed');
-    setTimeout(() => match.classList.remove('pressed'), 120);
-  }
-
-  // Prevent default Tab behavior
-  if (key === 'Tab') e.preventDefault();
+    
+    function insertTextAtCursor(text) {
+        const startPos = textInput.selectionStart;
+        const endPos = textInput.selectionEnd;
+        const currentValue = textInput.value;
+        
+        // Replace selected text or insert at cursor position
+        textInput.value = currentValue.substring(0, startPos) + text + currentValue.substring(endPos);
+        
+        // Move cursor to position after inserted text
+        textInput.selectionStart = textInput.selectionEnd = startPos + text.length;
+    }
+    
+    // Optional: Add physical keyboard support that highlights virtual keys
+    document.addEventListener('keydown', function(e) {
+        // Find and highlight corresponding virtual key
+        const virtualKey = findVirtualKey(e);
+        if (virtualKey) {
+            virtualKey.classList.add('keyboard_key--active');
+        }
+    });
+    
+    document.addEventListener('keyup', function(e) {
+        // Remove highlight from virtual key
+        const virtualKey = findVirtualKey(e);
+        if (virtualKey) {
+            virtualKey.classList.remove('keyboard_key--active');
+            virtualKey.classList.add('keyboard_key--pressed');
+            setTimeout(() => {
+                virtualKey.classList.remove('keyboard_key--pressed');
+            }, 150);
+        }
+    });
+    
+    function findVirtualKey(e) {
+        const key = e.key;
+        const code = e.code;
+        
+        // Special case for spacebar
+        if (key === ' ') {
+            return document.querySelector('[data-keyboard="Spacebar"]');
+        }
+        
+        // Look for data-keyboard attribute first
+        if (['Tab', 'Enter', 'Backspace', 'Shift', 'Control', 'Alt', 'CapsLock'].includes(key)) {
+            return document.querySelector(`[data-keyboard="${key}"]`);
+        }
+        
+        // Look for regular keys by text content
+        return Array.from(keyboardKeys).find(k => 
+            !k.getAttribute('data-keyboard') && k.textContent === key
+        );
+    }
+    
+    // Keep focus on textarea and prevent default behavior for some keys
+    textInput.addEventListener('keydown', function(e) {
+        if (['Tab', 'Enter'].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
 });
