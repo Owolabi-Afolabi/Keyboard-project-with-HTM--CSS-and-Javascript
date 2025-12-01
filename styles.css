@@ -27,11 +27,11 @@ body {
   width: 600px;
   height: 120px;
   font-size: 1.1rem;
-  padding: 10px;
+  padding: 30px;
   border: 2px solid #ddd;
-  border-radius: 10px;
-  resize: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 30px;
+  resize: horizontal;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -121,4 +121,47 @@ body {
     rgba(45, 35, 66, 0.4) 0 2px 4px,
     rgba(45, 35, 66, 0.3) 0 7px 13px -3px,
     #d6d6e7 0 -3px 0 inset;
+}
+
+
+/* =============================
+   DUAL CHARACTER KEY STYLING
+   ============================= */
+.keyboard_key[data-normal][data-shift] {
+  position: relative;
+  flex-direction: column;
+  font-size: 11px;
+  line-height: 1.0;
+  padding: 10px 16px;
+}
+
+.keyboard_key[data-normal][data-shift]::before {
+  content: attr(data-shift);
+  font-size: 10px;
+  opacity: 0;
+}
+
+.keyboard_key[data-normal][data-shift]::after {
+  content: attr(data-normal);
+  font-size: 20px;
+}
+
+/* Shift key elevation */
+.keyboard_key--shift {
+  transform: translateY(-4px);
+  box-shadow:
+    rgba(45, 35, 66, 0.3) 0 4px 8px,
+    rgba(45, 35, 66, 0.25) 0 7px 13px -3px,
+    #d6d6e7 0 -6px 0 inset,
+    rgba(0, 0, 0, 0.1) 0 0 10px 0px;
+  z-index: 10;
+  position: relative;
+}
+
+.keyboard_key--shift-active {
+  background-color: #e8e8f5;
+  transform: translateY(-2px);
+  box-shadow:
+    #d6d6e7 0 3px 7px inset,
+    rgba(0, 0, 0, 0.1) 0 0 8px 0px;
 }

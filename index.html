@@ -1,97 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
   <title>My Virtual Keyboard</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
-    <body>
-       <h2 class="title">Virtual keyboard</h2>
-       <div class="textInput">
-       <textarea id="textInput" placeholder="Type here..."></textarea>
-       </div>
+<body>
+  <h2 class="title">Virtual keyboard</h2>
+  <div class="textInput">
+    <textarea id="textInput" placeholder="Type here..."></textarea>
+  </div>
 
-<div class="keyboard">
-  <div class="keyboard_row">
-    <div class="keyboard_key">`</div>
-     <div class="keyboard_key">1</div>
-      <div class="keyboard_key">2</div>
-      <div class="keyboard_key">3</div>
-      <div class="keyboard_key">4</div>
-      <div class="keyboard_key">5</div>
-      <div class="keyboard_key">6</div>
-      <div class="keyboard_key">7</div>
-      <div class="keyboard_key">8</div>
-      <div class="keyboard_key">9</div>
-      <div class="keyboard_key">0</div>
-      <div class="keyboard_key">-</div>
-      <div class="keyboard_key">=</div>
+  <div class="keyboard">
+    <div class="keyboard_row">
+      <div class="keyboard_key" data-normal="`" data-shift="~">~</div>
+      <div class="keyboard_key" data-normal="1" data-shift="!">!</div>
+      <div class="keyboard_key" data-normal="2" data-shift="@">@</div>
+      <div class="keyboard_key" data-normal="3" data-shift="#">#</div>
+      <div class="keyboard_key" data-normal="4" data-shift="$">$</div>
+      <div class="keyboard_key" data-normal="5" data-shift="%">%</div>
+      <div class="keyboard_key" data-normal="6" data-shift="^">^</div>
+      <div class="keyboard_key" data-normal="7" data-shift="&">&</div>
+      <div class="keyboard_key" data-normal="8" data-shift="*">*</div>
+      <div class="keyboard_key" data-normal="9" data-shift="(">(</div>
+      <div class="keyboard_key" data-normal="0" data-shift=")">)</div>
+      <div class="keyboard_key" data-normal="-" data-shift="_">_</div>
+      <div class="keyboard_key" data-normal="=" data-shift="+">+</div>
       <div class="keyboard_key" data-keyboard="Backspace">Backspace</div>
-  </div>       
+    </div>
 
-  <div class="keyboard_row">
-     <div class="keyboard_key" data-keyboard="Tab">Tab</div>
-     <div class="keyboard_key">Q</div>
-      <div class="keyboard_key">W</div>
-      <div class="keyboard_key">E</div>
-      <div class="keyboard_key">R</div>
-      <div class="keyboard_key">T</div>
-      <div class="keyboard_key">Y</div>
-      <div class="keyboard_key">U</div>
-      <div class="keyboard_key">I</div>
-      <div class="keyboard_key">O</div>
-      <div class="keyboard_key">P</div>
-      <div class="keyboard_key">[</div>
-      <div class="keyboard_key">]</div>
-      <div class="keyboard_key">\</div>
-  </div>
+    <div class="keyboard_row">
+      <div class="keyboard_key" data-keyboard="Tab">Tab</div>
+      <div class="keyboard_key" data-normal="q" data-shift="Q"></div>
+      <div class="keyboard_key" data-normal="w" data-shift="W"></div>
+      <div class="keyboard_key" data-normal="e" data-shift="E"></div>
+      <div class="keyboard_key" data-normal="r" data-shift="R"></div>
+      <div class="keyboard_key" data-normal="t" data-shift="T"></div>
+      <div class="keyboard_key" data-normal="y" data-shift="Y"></div>
+      <div class="keyboard_key" data-normal="u" data-shift="U"></div>
+      <div class="keyboard_key" data-normal="i" data-shift="I"></div>
+      <div class="keyboard_key" data-normal="o" data-shift="O"></div>
+      <div class="keyboard_key" data-normal="p" data-shift="P"></div>
+      <div class="keyboard_key" data-normal="[" data-shift="{"> {</div>
+      <div class="keyboard_key" data-normal="]" data-shift="}"> }</div>
+      <div class="keyboard_key" data-normal="\" data-shift="|"> |</div>
+    </div>
 
-  <!-- Row 2 -->
-  <div class="keyboard_row">
-     <div class="keyboard_key" data-keyboard="CapsLock">CapsLock</div>
-    <div class="keyboard_key">A</div>
-    <div class="keyboard_key">S</div>
-    <div class="keyboard_key">D</div>
-    <div class="keyboard_key">F</div>
-    <div class="keyboard_key">G</div>
-    <div class="keyboard_key">H</div>
-    <div class="keyboard_key">J</div>
-    <div class="keyboard_key">K</div>
-    <div class="keyboard_key">L</div>
-    <div class="keyboard_key">;</div>
-    <div class="keyboard_key">'</div>
-     <div class="keyboard_key" data-keyboard="Enter">Enter</div>
-  </div>
+    <div class="keyboard_row">
+      <div class="keyboard_key" data-keyboard="CapsLock">CapsLock</div>
+      <div class="keyboard_key" data-normal="a" data-shift="A"></div>
+      <div class="keyboard_key" data-normal="s" data-shift="S"></div>
+      <div class="keyboard_key" data-normal="d" data-shift="D"></div>
+      <div class="keyboard_key" data-normal="f" data-shift="F"></div>
+      <div class="keyboard_key" data-normal="g" data-shift="G"></div>
+      <div class="keyboard_key" data-normal="h" data-shift="H"></div>
+      <div class="keyboard_key" data-normal="j" data-shift="J"></div>
+      <div class="keyboard_key" data-normal="k" data-shift="K"></div>
+      <div class="keyboard_key" data-normal="l" data-shift="L"></div>
+      <div class="keyboard_key" data-normal=";" data-shift=":"> :</div>
+      <div class="keyboard_key" data-normal="'" data-shift='"'> "</div>
+      <div class="keyboard_key" data-keyboard="Enter">Enter</div>
+    </div>
 
-  <div class="keyboard_row">
-    <div class="keyboard_key" data-keyboard="Shift">Shift</div>
-    <div class="keyboard_key">Z</div>
-    <div class="keyboard_key">X</div>
-    <div class="keyboard_key">C</div>
-    <div class="keyboard_key">V</div>
-    <div class="keyboard_key">B</div>
-    <div class="keyboard_key">N</div>
-    <div class="keyboard_key">M</div>
-    <div class="keyboard_key">,</div>
-    <div class="keyboard_key">.</div>
-    <div class="keyboard_key">/</div>
-    <div class="keyboard_key" data-keyboard="Shift">Shift</div>
-  </div>
+    <div class="keyboard_row">
+      <div class="keyboard_key keyboard_key--shift" data-keyboard="Shift">Shift</div>
+      <div class="keyboard_key" data-normal="z" data-shift="Z"></div>
+      <div class="keyboard_key" data-normal="x" data-shift="X"></div>
+      <div class="keyboard_key" data-normal="c" data-shift="C"></div>
+      <div class="keyboard_key" data-normal="v" data-shift="V"></div>
+      <div class="keyboard_key" data-normal="b" data-shift="B"></div>
+      <div class="keyboard_key" data-normal="n" data-shift="N"></div>
+      <div class="keyboard_key" data-normal="m" data-shift="M"></div>
+      <div class="keyboard_key" data-normal="," data-shift="<"> <</div>
+      <div class="keyboard_key" data-normal="." data-shift=">"> ></div>
+      <div class="keyboard_key" data-normal="/" data-shift="?"> ?</div>
+      <div class="keyboard_key keyboard_key--shift" data-keyboard="Shift">Shift</div>
+    </div>
 
-  
-  <div class="keyboard_row">
-    <div class="keyboard_key" data-keyboard="Ctrl">Ctrl</div>
-    <div class="keyboard_key" data-keyboard="Alt">Alt</div>
-    <div class="keyboard_key" data-keyboard="Spacebar">Spacebar</div>
-    <div class="keyboard_key" data-keyboard="Alt">Alt</div>
-     <div class="keyboard_key" data-keyboard="Fn">Fn</div>
+    
+    <div class="keyboard_row">
       <div class="keyboard_key" data-keyboard="Ctrl">Ctrl</div>
+      <div class="keyboard_key" data-keyboard="Alt">Alt</div>
+      <div class="keyboard_key" data-keyboard="Spacebar">Spacebar</div>
+      <div class="keyboard_key" data-keyboard="Alt">Alt</div>
+      <div class="keyboard_key" data-keyboard="Fn">Fn</div>
+      <div class="keyboard_key" data-keyboard="Ctrl">Ctrl</div>
+    </div>
   </div>
-</div>
 
-</div>
   <script src="script.js"></script>
 </body> 
 </html>
